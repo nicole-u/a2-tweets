@@ -24,16 +24,25 @@ class Tweet {
 
     //returns a boolean, whether the text includes any content written by the person tweeting.
     get written():boolean {
-        //TODO: identify whether the tweet is written
-        return false;
+        // all the ones with human text have a dash in them right
+        if (this.text.includes("-")) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     get writtenText():string {
+        var written:string = "";
+        var separator:number;
         if(!this.written) {
             return "";
+        } else {
+            separator = this.text.indexOf("-");
+            written = this.text.substring(separator);
+            written = written.trim();
         }
-        //TODO: parse the written text from the tweet
-        return "";
+        return written;
     }
 
     get activityType():string {
