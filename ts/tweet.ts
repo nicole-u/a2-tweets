@@ -49,16 +49,18 @@ class Tweet {
         if (this.source != 'completed_event') {
             return "unknown";
         }
-        //TODO: parse the activity type from the text of the tweet
-        return "";
+        var separatedTweet = this.text.split(" ");
+        var activityType = separatedTweet[5];
+        return activityType;
     }
 
     get distance():number {
         if(this.source != 'completed_event') {
             return 0;
         }
-        //TODO: prase the distance from the text of the tweet
-        return 0;
+        var splitSentence = this.text.split(" ");
+        var dist:number = Number(splitSentence[3]);
+        return dist;
     }
 
     getHTMLTableRow(rowNumber:number):string {
