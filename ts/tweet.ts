@@ -64,6 +64,7 @@ class Tweet {
     }
 
     getHTMLTableRow(rowNumber:number):string {
+        // figure out how to access html table so i can get the item at index rowNumber
         //TODO: return a table row which summarizes the tweet with a clickable link to the RunKeeper activity
         return "<tr></tr>";
     }
