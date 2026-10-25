@@ -5,7 +5,10 @@ function parseTweets(runkeeper_tweets) {
 		return;
 	}
 
+	var dates = [];
+
 	tweet_array = runkeeper_tweets.map(function(tweet) {
+		dates.push(Date.parse(new Date(tweet.created_at))); //i can put this here right
 		return new Tweet(tweet.text, tweet.created_at);
 	});
 	
@@ -19,6 +22,14 @@ function parseTweets(runkeeper_tweets) {
 	var achievements = 0;
 	var miscellaneous = 0;
 	var written = 0;
+	var earliestDate;
+	var latestDate;
+
+	//WHAT THE HELL IS A DATE OBJECT!!!!!!!!!!
+	earliestDate = new Date(dates.sort()[0]).toDateString().split(" "); //wow i can parse the date and format it in one go
+	latestDate = new Date(dates.sort()[dates.length-1]).toDateString().split(" ");
+	//console.log(dates);
+	//console.log(earliestDate);
 	
 	//the horrible terrible sorting loop
 	for (let i = 0; i < tweet_array.length; i++) {
@@ -38,22 +49,27 @@ function parseTweets(runkeeper_tweets) {
 		}
 		else if (currentTweet.source == "miscellaneous") {
 			miscellaneous++;
+			//console.log(currentTweet);
 		}
 		else {
 			continue;
 		}
 	}
 
-	//update all html
+	//it's date updating time
+	document.getElementById("firstDate").innerText = earliestDate[1] + " " + earliestDate[2] + ", " + earliestDate[3];
+	document.getElementById("lastDate").innerText = latestDate[1] + " " + latestDate[2] + ", " + latestDate[3];
+
+	//update all numbers
 	document.getElementsByClassName('completedEvents')[0].innerText = completedEvents;
 	document.getElementsByClassName('completedEvents')[1].innerText = completedEvents;
-	document.getElementsByClassName('completedEventsPct')[0].innerText = ((completedEvents / tweet_array.length) * 100).toFixed(2) + "%";
-
 	document.getElementsByClassName('liveEvents')[0].innerText = liveEvents;
 	document.getElementsByClassName('achievements')[0].innerText = achievements;
 	document.getElementsByClassName('miscellaneous')[0].innerText = miscellaneous;
 	document.getElementsByClassName('written')[0].innerText = written;
 
+	//update percentages aka i really should've processed these before attempting to update them but this works so i don't really care
+	document.getElementsByClassName('completedEventsPct')[0].innerText = ((completedEvents / tweet_array.length) * 100).toFixed(2) + "%";
 	document.getElementsByClassName('liveEventsPct')[0].innerText = ((liveEvents / tweet_array.length) * 100).toFixed(2) + "%";
 	document.getElementsByClassName('achievementsPct')[0].innerText = ((achievements / tweet_array.length) * 100).toFixed(2) + "%";
 	document.getElementsByClassName('miscellaneousPct')[0].innerText = ((miscellaneous / tweet_array.length) * 100).toFixed(2) + "%";

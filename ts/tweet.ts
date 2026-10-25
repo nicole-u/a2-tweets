@@ -10,7 +10,7 @@ class Tweet {
 	//returns either 'live_event', 'achievement', 'completed_event', or 'miscellaneous'
     get source():string {
         var typeOfEvent:string="";
-        if (this.text.startsWith("Just completed")) {
+        if (this.text.startsWith("Just completed") || this.text.startsWith("Just posted") || this.text.startsWith("Completed")) {
             typeOfEvent = "completed_event";
         } else if (this.text.startsWith("Achieved a new")) {
             typeOfEvent = "achievement";
