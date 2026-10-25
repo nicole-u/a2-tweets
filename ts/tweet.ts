@@ -10,11 +10,12 @@ class Tweet {
 	//returns either 'live_event', 'achievement', 'completed_event', or 'miscellaneous'
     get source():string {
         var typeOfEvent:string="";
-        if (this.text.startsWith("Just completed") || this.text.startsWith("Just posted") || this.text.startsWith("Completed")) {
+        var lower = this.text.toLowerCase();
+        if (lower.includes("completed") || lower.includes("just posted")) {
             typeOfEvent = "completed_event";
-        } else if (this.text.startsWith("Achieved a new")) {
+        } else if (lower.includes("achieved")) {
             typeOfEvent = "achievement";
-        } else if (this.text.startsWith("Watch my")) {
+        } else if (lower.includes("watch")) {
             typeOfEvent = "live_event";
         } else {
             typeOfEvent = "miscellaneous";
@@ -46,6 +47,7 @@ class Tweet {
     }
 
     get activityType():string {
+        //TODO: refine this bc i get a lot of weird values
         if (this.source != 'completed_event') {
             return "unknown";
         }
@@ -65,6 +67,7 @@ class Tweet {
 
     getHTMLTableRow(rowNumber:number):string {
         // figure out how to access html table so i can get the item at index rowNumber
+        document.getElementById("tweetTable");
         //TODO: return a table row which summarizes the tweet with a clickable link to the RunKeeper activity
         return "<tr></tr>";
     }

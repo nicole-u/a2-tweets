@@ -5,10 +5,20 @@ function parseTweets(runkeeper_tweets) {
 		return;
 	}
 	
+	var activities = [];
+
 	tweet_array = runkeeper_tweets.map(function(tweet) {
 		return new Tweet(tweet.text, tweet.created_at);
 	});
-
+	
+	for (let i = 0; i < tweet_array.length; i++) {
+		var currentTweet = tweet_array[i];
+		var activity = currentTweet.activityType.toLowerCase();
+		console.log(activity);
+		if (!activities.includes(activity)) {
+			activities.push(activity);
+		}
+	}
 	//TODO: create a new array or manipulate tweet_array to create a graph of the number of tweets containing each type of activity.
 
 	activity_vis_spec = {
