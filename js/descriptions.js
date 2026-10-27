@@ -29,7 +29,7 @@ function addEventHandlerForSearch() {
 		document.getElementById("searchCount").innerHTML = matchingTweets.length;
 		//console.log(matchingTweets);
 		var tableBody = document.getElementById("tweetTable");
-		tableBody.innerHTML = "";
+		tableBody.innerHTML = ""; //clear table before new content is put in
 		for (let i = 0; i < matchingTweets.length; i++) {
 			var currentTweet = matchingTweets[i];
 			var row = tableBody.insertRow(i);
@@ -40,7 +40,12 @@ function addEventHandlerForSearch() {
 			cell2.innerHTML = currentTweet.activityType;
 			cell3.innerHTML = currentTweet.text;
 		}
-		matchingTweets.splice(0, matchingTweets.length);
+		matchingTweets=[]; //clear array once done putting content in
+		if (search == "") {
+			tableBody.innerHTML = "";
+			document.getElementById("searchCount").innerHTML = 0;
+			document.getElementById("searchText").innerHTML = "";
+		}
 	});
 }
 

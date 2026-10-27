@@ -51,8 +51,25 @@ class Tweet {
         if (this.source != 'completed_event') {
             return "unknown";
         }
-        var separatedTweet = this.text.split(" ");
-        var activityType = separatedTweet[5];
+        var activityType = "";
+        
+        if (this.text.toLowerCase().includes("km")) {
+            var kmPosition = this.text.toLowerCase().search("km");
+            var separated = this.text.slice(kmPosition + 3);
+            var firstSpace = separated.search(" ");
+            activityType = separated.slice(0, firstSpace);
+        }
+        else if (this.text.toLowerCase().includes("mi")) {
+            var miPosition = this.text.toLowerCase().search("mi");
+            var separated = this.text.slice(miPosition + 3);
+            //console.log(separated);
+            var firstSpace = separated.search(" ");
+            activityType = separated.slice(0, firstSpace + 1).trim();
+        }
+        else {
+            activityType = "time based";
+        }
+        //console.log(activityType);
         return activityType;
     }
 
@@ -60,15 +77,22 @@ class Tweet {
         if(this.source != 'completed_event') {
             return 0;
         }
-        var splitSentence = this.text.split(" ");
-        var dist:number = Number(splitSentence[3]);
-        return dist;
+        var num:number = Number(this.text.match(/[+-]?\d+\.*\d+/g));
+        if (this.text.toLowerCase().includes("km")) {
+            num /= 1.609;
+        }
+        return num;
     }
 
     getHTMLTableRow(rowNumber:number):string {
         // figure out how to access html table so i can get the item at index rowNumber
-        document.getElementById("tweetTable");
-        //TODO: return a table row which summarizes the tweet with a clickable link to the RunKeeper activity
-        return "<tr></tr>";
+        var tableBody = document.getElementById("tweetTable") as HTMLTableElement;
+        if (tableBody != null) {
+            var rows = tableBody.rows;
+            return String(rows[rowNumber]);
+        }
+        else {
+            return "<tr></tr>";
+        }
     }
 }
