@@ -9,6 +9,16 @@ function parseTweets(runkeeper_tweets) {
 	for (let i = 0; i < runkeeper_tweets.length; i++) {
 		var current = runkeeper_tweets[i];
 		var currentTweet = new Tweet(current.text, current.created_at);
+		var linkStart = currentTweet.text.search("https");
+		var linkEnd = currentTweet.text.indexOf(" ", linkStart);
+		//console.log(linkStart, linkEnd);
+		var beforeLink = currentTweet.text.slice(0, linkStart);
+		var link = currentTweet.text.slice(linkStart, linkEnd);
+		var afterLink = currentTweet.text.slice(linkEnd);
+		//console.log(beforeLink, "lolol", link, "ahaha", afterLink)
+		var formatted = beforeLink + "<a href='" + link + "'>" + link + "</a>" + afterLink;
+		//console.log(formatted);
+		currentTweet.text = formatted;
 		if (currentTweet.written) {
 			writtenTweets.push(currentTweet);
 		}

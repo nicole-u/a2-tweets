@@ -4,8 +4,9 @@
 
 */10
 - 3/3 Summarizing tweets
-- 3/4 Identifying the most popular activities <- I believe I could've found a better way to complete this step using JS methods instead of having to print test arrays to the console and hardcode the results into a different array
-- */3 Adding a text search interface
+- 2.5/4 Identifying the most popular activities 
+---> I believe I could've found a better way to complete this step using JS methods instead of having to print test arrays to the console and hardcode the results into a different array. My successful results were only because of this, and should a different set of Tweets be used, it may not work as successfully as it did for this assignment.
+- 2.5/3 Adding a text search interface
 
 2. How long, in hours, did it take you to complete this assignment?
 A long time. Maybe like 15-20 hours??
@@ -18,6 +19,7 @@ A long time. Maybe like 15-20 hours??
 - https://medium.com/@jedwardmook/creating-a-simple-search-bar-f1974bc82bdc <- for search bar stuff. thank you mr. search bar man
 - https://www.w3schools.com/jsref/met_table_insertrow.asp
 - https://stackoverflow.com/questions/17374893/how-to-extract-floating-numbers-from-strings-in-javascript
+- https://vega.github.io/vega-lite/tutorials/getting_started.html
 
 
 4. What classmates or other individuals did you consult as part of this assignment? What did you discuss?
@@ -25,4 +27,4 @@ A long time. Maybe like 15-20 hours??
 
 
 5. Is there anything special we need to know in order to run your code?
-
+nope
